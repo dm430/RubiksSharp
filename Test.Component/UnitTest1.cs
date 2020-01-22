@@ -1,0 +1,24 @@
+using RubiksSharp.Model.Implementation;
+using Xunit;
+
+namespace Test.Component
+{
+    public class CubeTests
+    {
+        [Fact]
+        public void CanRotateReletiveCubeFaces()
+        {
+            var cube = new ThreeByThreeCube();
+
+            cube.RotateClockwise(cube.FrontFace);
+            cube.RotateCounterClockwise(cube.FrontFace);
+
+            Assert.True(cube.IsSolved);
+
+            cube.RotateClockwise(cube.BackFace);
+            cube.RotateCounterClockwise(cube.BackFace);
+
+            Assert.True(cube.IsSolved);
+        }
+    }
+}
