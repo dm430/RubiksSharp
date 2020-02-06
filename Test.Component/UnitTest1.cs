@@ -19,6 +19,26 @@ namespace Test.Component
             cube.RotateCounterClockwise(cube.BackFace);
 
             Assert.True(cube.IsSolved);
+
+            cube.RotateClockwise(cube.LeftFace);
+            cube.RotateCounterClockwise(cube.LeftFace);
+
+            Assert.True(cube.IsSolved);
+
+            cube.RotateClockwise(cube.RightFace);
+            cube.RotateCounterClockwise(cube.RightFace);
+
+            Assert.True(cube.IsSolved);
+
+            cube.RotateClockwise(cube.TopFace);
+            cube.RotateCounterClockwise(cube.TopFace);
+
+            Assert.True(cube.IsSolved);
+
+            cube.RotateClockwise(cube.BottomFace);
+            cube.RotateCounterClockwise(cube.BottomFace);
+
+            Assert.True(cube.IsSolved);
         }
     }
 }

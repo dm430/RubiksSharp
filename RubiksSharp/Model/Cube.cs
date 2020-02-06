@@ -35,36 +35,50 @@ namespace RubiksSharp
             }
         }
 
-        public void RotateClockwise(CubeFace face)
+        private void MapRotation(Action<CubeRow, CubeRow, CubeRow, CubeRow> rotate)
         {
-            if (face == FrontFace)
+            // topRow, bottomRow, leftRow, rightRow
+
+            // TODO: Im almost positive that I messed this up. Get an actual cube and check. Also use a consistent relative mapping.
+
+            if (rotate.Target == FrontFace)
             {
-                FrontFace.RotateClockwise(TopFace.BottomRow, BottomFace.TopRow, LeftFace.RightRow, RightFace.LeftRow);
+                rotate(TopFace.BottomRow, BottomFace.TopRow, LeftFace.RightRow, RightFace.LeftRow);
             }
-            else if (face == BackFace)
+            else if (rotate.Target == BackFace)
             {
-                BackFace.RotateClockwise(TopFace.TopRow, BottomFace.BottomRow, RightFace.RightRow, LeftFace.LeftRow);
+                rotate(TopFace.TopRow, BottomFace.BottomRow, RightFace.RightRow, LeftFace.LeftRow);
+            }
+            else if (rotate.Target == LeftFace)
+            {
+                rotate(TopFace.LeftRow, BottomFace.LeftRow, BackFace.RightRow, FrontFace.LeftRow);
+            }
+            else if (rotate.Target == RightFace)
+            {
+                rotate(TopFace.RightRow, BottomFace.RightRow, FrontFace.RightRow, BackFace.LeftRow);
+            }
+            else if (rotate.Target == TopFace)
+            {
+                rotate(BackFace.TopRow, FrontFace.TopRow, LeftFace.TopRow, RightFace.TopRow);
+            }
+            else if (rotate.Target == BottomFace)
+            {
+                rotate(FrontFace.BottomRow, BackFace.BottomRow, LeftFace.BottomRow, RightFace.BottomRow);
             }
             else
             {
-                throw new NotImplementedException();
+                throw new InvalidOperationException("The target face does not belong to the cube. Rotation cannot be performed.");
             }
+        }
+
+        public void RotateClockwise(CubeFace face)
+        {
+            MapRotation(face.RotateClockwise);
         }
 
         public void RotateCounterClockwise(CubeFace face)
         {
-            if (face == FrontFace)
-            {
-                FrontFace.RotateCounterClockwise(TopFace.BottomRow, BottomFace.TopRow, LeftFace.RightRow, RightFace.LeftRow);
-            }
-            else if (face == BackFace)
-            {
-                BackFace.RotateCounterClockwise(TopFace.TopRow, BottomFace.BottomRow, RightFace.RightRow, LeftFace.LeftRow);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            MapRotation(face.RotateCounterClockwise);
         }
     }
 }
