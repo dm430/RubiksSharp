@@ -39,31 +39,29 @@ namespace RubiksSharp
         {
             // topRow, bottomRow, leftRow, rightRow
 
-            // TODO: Im almost positive that I messed this up. Get an actual cube and check. Also use a consistent relative mapping.
-
             if (rotate.Target == FrontFace)
             {
                 rotate(TopFace.BottomRow, BottomFace.TopRow, LeftFace.RightRow, RightFace.LeftRow);
             }
             else if (rotate.Target == BackFace)
             {
-                rotate(TopFace.TopRow, BottomFace.BottomRow, RightFace.RightRow, LeftFace.LeftRow);
+                rotate(BottomFace.BottomRow, TopFace.TopRow, LeftFace.LeftRow, RightFace.RightRow);
             }
             else if (rotate.Target == LeftFace)
             {
-                rotate(TopFace.LeftRow, BottomFace.LeftRow, BackFace.RightRow, FrontFace.LeftRow);
+                rotate(TopFace.LeftRow, BottomFace.LeftRow, BackFace.LeftRow, FrontFace.LeftRow);
             }
             else if (rotate.Target == RightFace)
             {
-                rotate(TopFace.RightRow, BottomFace.RightRow, FrontFace.RightRow, BackFace.LeftRow);
+                rotate(TopFace.RightRow, BottomFace.RightRow, FrontFace.RightRow, BackFace.RightRow);
             }
             else if (rotate.Target == TopFace)
             {
-                rotate(BackFace.TopRow, FrontFace.TopRow, LeftFace.TopRow, RightFace.TopRow);
+                rotate(BackFace.BottomRow, FrontFace.TopRow, LeftFace.TopRow, RightFace.TopRow);
             }
             else if (rotate.Target == BottomFace)
             {
-                rotate(FrontFace.BottomRow, BackFace.BottomRow, LeftFace.BottomRow, RightFace.BottomRow);
+                rotate(FrontFace.BottomRow, BackFace.TopRow, LeftFace.BottomRow, RightFace.BottomRow);
             }
             else
             {
@@ -73,11 +71,21 @@ namespace RubiksSharp
 
         public void RotateClockwise(CubeFace face)
         {
+            if (face == null)
+            {
+                throw new ArgumentNullException(nameof(face));
+            }
+
             MapRotation(face.RotateClockwise);
         }
 
         public void RotateCounterClockwise(CubeFace face)
         {
+            if (face == null)
+            {
+                throw new ArgumentNullException(nameof(face));
+            }
+
             MapRotation(face.RotateCounterClockwise);
         }
     }
