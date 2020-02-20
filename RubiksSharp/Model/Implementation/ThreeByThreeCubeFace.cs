@@ -8,7 +8,7 @@ namespace RubiksSharp.Model.Implementation
     {
         private const int Size = 3;
         private const int MiddleRowIndex = 1;
-        private const int TopRowIndex = 0;
+        private const string InvlaideRowMessage = "The supplied row does not fit on a three by three cube.";
 
         public ThreeByThreeCubeFace(Color color) : base(color, Size, Size)
         {
@@ -31,43 +31,24 @@ namespace RubiksSharp.Model.Implementation
             {
                 throw new ArgumentNullException(nameof(bottomRow));
             }
+
+            if (topRow.Facelets.Count != Size)
+            {
+                throw new ArgumentException(InvlaideRowMessage, nameof(topRow));
+            }
+
+            if (middleRow.Facelets.Count != Size)
+            {
+                throw new ArgumentException(InvlaideRowMessage, nameof(middleRow));
+            }
+
+            if (bottomRow.Facelets.Count != Size)
+            {
+                throw new ArgumentException(InvlaideRowMessage, nameof(bottomRow));
+            }
         }
 
         public CubeRow MiddleRow => rows[MiddleRowIndex];
-
-        public override CubeRow TopRow => rows[TopRowIndex];
-
-        public override CubeRow BottomRow => rows[rows.Count - 1];
-
-        public override CubeRow LeftRow
-        {
-            get
-            {
-                var facelets = new List<Facelet>()
-                {
-                    TopRow.Facelets[0],
-                    MiddleRow.Facelets[0],
-                    BottomRow.Facelets[0]
-                };
-
-                return new CubeRow(facelets);
-            }
-        }
-
-        public override CubeRow RightRow
-        {
-            get
-            {
-                var facelets = new List<Facelet>()
-                {
-                    TopRow.Facelets[2],
-                    MiddleRow.Facelets[2],
-                    BottomRow.Facelets[2]
-                };
-
-                return new CubeRow(facelets);
-            }
-        }
 
         public override void RotateClockwise(CubeRow topRow, CubeRow bottomRow, CubeRow leftRow, CubeRow rightRow)
         {
