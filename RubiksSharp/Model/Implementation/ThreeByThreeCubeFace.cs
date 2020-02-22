@@ -52,19 +52,48 @@ namespace RubiksSharp.Model.Implementation
 
         public override void RotateClockwise(CubeRow topRow, CubeRow bottomRow, CubeRow leftRow, CubeRow rightRow)
         {
-            // TODO: Rotate face.
-            for (var x = 0; x < rows.Count; x++)
-            {
-
-            }
-
+            MapFaceRotation(Size, RotateFaceClockwise);
             RotateRowsOfAdjacentFacesClockwise(topRow, bottomRow, leftRow, rightRow);
         }
 
         public override void RotateCounterClockwise(CubeRow topRow, CubeRow bottomRow, CubeRow leftRow, CubeRow rightRow)
         {
-            // TODO: Rotate face.
+            MapFaceRotation(Size, RotateFaceCounterClockwise);
             RotateRowsOfAdjacentFacesCounterClockwise(topRow, bottomRow, leftRow, rightRow);
+        }
+
+        private void MapFaceRotation(int rowSize, Action<Facelet, Facelet, Facelet, Facelet, Color> rotate)
+        {
+            for (var cycle = 0; cycle < rowSize / 2; cycle++)
+            {
+                for (var index = cycle; index < rowSize - 1 - cycle; index++)
+                {
+                    var facelet1 = Rows[cycle].Facelets[index];
+                    var facelet2 = Rows[index].Facelets[rowSize - 1 - cycle];
+                    var facelet3 = Rows[rowSize - 1 - cycle].Facelets[rowSize - 1 - index];
+                    var facelet4 = rows[rowSize - 1 - index].Facelets[cycle];
+
+                    var facletColorBuffer = facelet2.CurrentColor;
+
+                    rotate(facelet1, facelet2, facelet3, facelet4, facletColorBuffer);
+                }
+            }
+        }
+
+        private static void RotateFaceClockwise(Facelet facelet1, Facelet facelet2, Facelet facelet3, Facelet facelet4, Color facletColorBuffer)
+        {
+            facelet2.CurrentColor = facelet1.CurrentColor;
+            facelet1.CurrentColor = facelet4.CurrentColor;
+            facelet4.CurrentColor = facelet3.CurrentColor;
+            facelet3.CurrentColor = facletColorBuffer;
+        }
+
+        private static void RotateFaceCounterClockwise(Facelet facelet1, Facelet facelet2, Facelet facelet3, Facelet facelet4, Color facletColorBuffer)
+        {
+            facelet2.CurrentColor = facelet3.CurrentColor;
+            facelet3.CurrentColor = facelet4.CurrentColor;
+            facelet4.CurrentColor = facelet1.CurrentColor;
+            facelet1.CurrentColor = facletColorBuffer;
         }
     }
 }
