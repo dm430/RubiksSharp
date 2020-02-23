@@ -1,6 +1,5 @@
 ﻿using RubiksSharp.Model;
 using RubiksSharp.Model.Data;
-using System;
 
 namespace RubiksSharp
 {

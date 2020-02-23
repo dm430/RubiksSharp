@@ -41,6 +41,18 @@ namespace RubiksSharp
 
         public bool IsSolved => Facelets.All(facelet => facelet.IsSolved);
 
+        public CubeRow ChangeOrientation()
+        {
+            var faceletsx = new List<Facelet>();
+
+            for (var i = facelets.Count - 1; i >= 0; i--)
+            {
+                faceletsx.Add(facelets[i]);
+            }
+
+            return new CubeRow(faceletsx);
+        }
+
         public object Clone()
         {
             var faceletClones = new List<Facelet>();

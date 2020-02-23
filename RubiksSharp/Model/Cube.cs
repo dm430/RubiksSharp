@@ -45,23 +45,23 @@ namespace RubiksSharp
             }
             else if (rotate.Target == BackFace)
             {
-                rotate(BottomFace.BottomRow, TopFace.TopRow, LeftFace.LeftRow, RightFace.RightRow);
+                rotate(BottomFace.BottomRow, TopFace.TopRow, LeftFace.LeftRow.ChangeOrientation(), RightFace.RightRow.ChangeOrientation());
             }
             else if (rotate.Target == LeftFace)
             {
-                rotate(TopFace.LeftRow, BottomFace.LeftRow, BackFace.LeftRow, FrontFace.LeftRow);
+                rotate(TopFace.LeftRow, BottomFace.LeftRow.ChangeOrientation(), BackFace.RightRow, FrontFace.LeftRow);
             }
             else if (rotate.Target == RightFace)
             {
-                rotate(TopFace.RightRow, BottomFace.RightRow, FrontFace.RightRow, BackFace.RightRow);
+                rotate(TopFace.RightRow.ChangeOrientation(), BottomFace.RightRow, FrontFace.RightRow, BackFace.LeftRow);
             }
             else if (rotate.Target == TopFace)
             {
-                rotate(BackFace.BottomRow, FrontFace.TopRow, LeftFace.TopRow, RightFace.TopRow);
+                rotate(BackFace.TopRow, FrontFace.TopRow.ChangeOrientation(), LeftFace.TopRow.ChangeOrientation(), RightFace.TopRow);
             }
             else if (rotate.Target == BottomFace)
             {
-                rotate(FrontFace.BottomRow, BackFace.TopRow, LeftFace.BottomRow, RightFace.BottomRow);
+                rotate(FrontFace.BottomRow.ChangeOrientation(), BackFace.BottomRow, LeftFace.BottomRow, RightFace.BottomRow.ChangeOrientation());
             }
             else
             {
