@@ -1,19 +1,9 @@
-﻿using RubiksSharp.Model.Data;
-using RubiksSharp.Model.Implementation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RubiksSharp.Model.Implementation;
+using RubiksSharp.Viewer.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RubiksSharp.Viewer
@@ -23,68 +13,77 @@ namespace RubiksSharp.Viewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CubeViewModel cubeViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
 
             var cube = new ThreeByThreeCube();
+            cubeViewModel = new CubeViewModel(cube);
 
-            cube.RotateClockwise(cube.RightFace);   // R
-            cube.RotateClockwise(cube.FrontFace);   // F
-            cube.RotateClockwise(cube.LeftFace);    // L
-            cube.RotateClockwise(cube.LeftFace);    // L
-            cube.RotateClockwise(cube.RightFace);   // R
-            cube.RotateClockwise(cube.FrontFace);   // F
-            cube.RotateClockwise(cube.FrontFace);   // F
-            cube.RotateClockwise(cube.RightFace);   // R
-            cube.RotateClockwise(cube.BackFace);    // B
-            cube.RotateCounterClockwise(cube.BackFace); // B'
-            cube.RotateClockwise(cube.LeftFace);    // L
-            cube.RotateClockwise(cube.FrontFace);   // F
-            cube.RotateCounterClockwise(cube.RightFace); // R'
-            cube.RotateCounterClockwise(cube.LeftFace);    // L'
-            cube.RotateClockwise(cube.TopFace); // U
-            cube.RotateCounterClockwise(cube.RightFace); // R'
+            //cube.RotateClockwise(cube.RightFace);   // R
+            //cube.RotateClockwise(cube.FrontFace);   // F
+            //cube.RotateClockwise(cube.LeftFace);    // L
+            //cube.RotateClockwise(cube.LeftFace);    // L
+            //cube.RotateClockwise(cube.RightFace);   // R
+            //cube.RotateClockwise(cube.FrontFace);   // F
+            //cube.RotateClockwise(cube.FrontFace);   // F
+            //cube.RotateClockwise(cube.RightFace);   // R
+            //cube.RotateClockwise(cube.BackFace);    // B
+            //cube.RotateCounterClockwise(cube.BackFace); // B'
+            //cube.RotateClockwise(cube.LeftFace);    // L
+            //cube.RotateClockwise(cube.FrontFace);   // F
+            //cube.RotateCounterClockwise(cube.RightFace); // R'
+            //cube.RotateCounterClockwise(cube.LeftFace);    // L'
+            //cube.RotateClockwise(cube.TopFace); // U
+            //cube.RotateCounterClockwise(cube.RightFace); // R'
+            //cube.RotateClockwise(cube.BottomFace); // D
+            //cube.RotateCounterClockwise(cube.FrontFace);   // F'
+            //cube.RotateCounterClockwise(cube.TopFace); // U'
+            //cube.RotateCounterClockwise(cube.FrontFace);   // F'
+            //cube.RotateCounterClockwise(cube.TopFace); // U'
 
-            cube.RotateClockwise(cube.BottomFace); // D
+            BindFace(frontFace, cubeViewModel.FrontFace);
+            BindFace(backFace, cubeViewModel.BackFace);
+            BindFace(leftFace, cubeViewModel.LeftFace);
+            BindFace(rightFace, cubeViewModel.RightFace);
+            BindFace(topFace, cubeViewModel.TopFace);
+            BindFace(bottomFace, cubeViewModel.BottomFace);
 
-            BindFace(frontFace, cube.FrontFace);
-            BindFace(backFace, cube.BackFace);
-            BindFace(leftFace, cube.LeftFace);
-            BindFace(rightFace, cube.RightFace);
-            BindFace(topFace, cube.TopFace);
-            BindFace(bottomFace, cube.BottomFace);
+            //// Solve
+            //cubeViewModel.RotateCounterClockwise(cubeViewModel.RightFace); // R'
+            //cubeViewModel.RotateClockwise(cubeViewModel.TopFace);     // U
+            //cubeViewModel.RotateClockwise(cubeViewModel.LeftFace);    // L
+            //cubeViewModel.RotateClockwise(cubeViewModel.LeftFace);    // L
+            //cubeViewModel.RotateClockwise(cubeViewModel.TopFace);     // U
+            //cubeViewModel.RotateClockwise(cubeViewModel.RightFace);   // R
+            //cubeViewModel.RotateClockwise(cubeViewModel.RightFace);   // R
+            //cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);   // F
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateCounterClockwise(cubeViewModel.RightFace);    // R'
+            //cubeViewModel.RotateCounterClockwise(cubeViewModel.TopFace);      // U'
+            //cubeViewModel.RotateCounterClockwise(cubeViewModel.LeftFace);     // L'
+            //cubeViewModel.RotateClockwise(cubeViewModel.TopFace);     // U
+            //cubeViewModel.RotateClockwise(cubeViewModel.RightFace);   // R
+            //cubeViewModel.RotateClockwise(cubeViewModel.RightFace);   // R
+            //cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);   // F
+            //cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);   // F
+            //cubeViewModel.RotateClockwise(cubeViewModel.BottomFace);  // D
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateClockwise(cubeViewModel.BottomFace);  // D
+            //cubeViewModel.RotateClockwise(cubeViewModel.BottomFace);  // D 
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateClockwise(cubeViewModel.BackFace);    // B
+            //cubeViewModel.RotateCounterClockwise(cubeViewModel.TopFace);  // U'
+            //cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);   // F
+            //cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);   // F
+            //cubeViewModel.RotateClockwise(cubeViewModel.BottomFace);  // D
         }
 
-        private void BindFaceInReverse(UniformGrid gridFace, CubeFace backFace2)
-        {
-            for (var i = backFace2.Rows.Count - 1; i >= 0; i--)
-            {
-                var row = backFace2.Rows[i];
-
-                for (var i2 = row.Facelets.Count - 1; i2 >= 0; i2--)
-                {
-                    var facelet = row.Facelets[i2];
-
-                    var faceletColorBinding = new Binding("CurrentColor")
-                    {
-                        Source = facelet,
-                        Mode = BindingMode.OneWay,
-                        Converter = new FaceletConverter()
-                    };
-
-                    var faceletRectangle = new Rectangle()
-                    {
-                        Stroke = new SolidColorBrush(Colors.Black)
-                    };
-
-                    faceletRectangle.SetBinding(Shape.FillProperty, faceletColorBinding);
-                    gridFace.Children.Add(faceletRectangle);
-                }
-            }
-        }
-
-        private void BindFace(UniformGrid gridFace, CubeFace face)
+        private void BindFace(UniformGrid gridFace, FaceViewModel face)
         {
             foreach (var row in face.Rows)
             {
@@ -106,6 +105,68 @@ namespace RubiksSharp.Viewer
                     gridFace.Children.Add(faceletRectangle);
                 }
             }
+        }
+
+        // TODO: Command pattern.
+
+        private void RotateF_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.FrontFace);
+        }
+
+        private void RotateFP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.FrontFace);
+        }
+
+        private void RotateL_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.LeftFace);
+        }
+
+        private void RotateLP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.LeftFace);
+        }
+
+        private void RotateR_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.RightFace);
+        }
+
+        private void RotateRP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.RightFace);
+        }
+
+        private void RotateU_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.TopFace);
+        }
+
+        private void RotateUP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.TopFace);
+        }
+
+        private void RotateD_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.BottomFace);
+        }
+
+        private void RotateDP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.BottomFace);
+        }
+
+        private void RotateB_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateClockwise(cubeViewModel.BackFace);
+        }
+
+        private void RotateBP_Click(object sender, RoutedEventArgs e)
+        {
+            cubeViewModel.RotateCounterClockwise(cubeViewModel.BackFace);
         }
     }
 }

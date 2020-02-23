@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace RubiksSharp.Viewer
 {
-    class FacletViewModel
+    class FacletViewModel : INotifyPropertyChanged
     {
         private readonly Facelet facelet;
 
@@ -20,8 +20,13 @@ namespace RubiksSharp.Viewer
             set
             {
                 facelet.CurrentColor = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentColor)));
+                TriggerChange();
             }
+        }
+
+        public void TriggerChange()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentColor"));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
