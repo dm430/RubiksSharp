@@ -1,4 +1,4 @@
-﻿using RubiksSharp;
+﻿using RubiksSharp.Model;
 using RubiksSharp.Model.Data;
 using RubiksSharp.Model.Implementation;
 using System;

@@ -3,7 +3,7 @@ using System.Linq;
 using RubiksSharp.Model.Data;
 using System.Collections.Generic;
 
-namespace RubiksSharp
+namespace RubiksSharp.Model
 {
     public abstract class CubeFace
     {

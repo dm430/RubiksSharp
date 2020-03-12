@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using RubiksSharp.Model;
 using RubiksSharp.Model.Data;
 using System.Collections.Generic;
 
-namespace RubiksSharp
+namespace RubiksSharp.Model
 {
     public class CubeRow : IDeepCloneable<CubeRow>
     {

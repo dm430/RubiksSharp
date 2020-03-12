@@ -1,4 +1,5 @@
-﻿using RubiksSharp.Model.Data;
+﻿using RubiksSharp.Model;
+using RubiksSharp.Model.Data;
 using System.ComponentModel;
 
 namespace RubiksSharp.Viewer

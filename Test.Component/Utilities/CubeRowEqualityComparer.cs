@@ -1,4 +1,4 @@
-﻿using RubiksSharp;
+﻿using RubiksSharp.Model;
 using System.Collections.Generic;
 
 namespace Test.Component

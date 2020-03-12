@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RubiksSharp
+namespace RubiksSharp.Model
 {
     public abstract class Cube
     {
@@ -69,7 +69,7 @@ namespace RubiksSharp
             }
         }
 
-        public void RotateClockwise(CubeFace face)
+        public virtual void RotateClockwise(CubeFace face)
         {
             if (face == null)
             {
@@ -79,7 +79,7 @@ namespace RubiksSharp
             MapRotation(face.RotateClockwise);
         }
 
-        public void RotateCounterClockwise(CubeFace face)
+        public virtual void RotateCounterClockwise(CubeFace face)
         {
             if (face == null)
             {

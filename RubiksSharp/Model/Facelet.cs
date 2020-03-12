@@ -1,7 +1,6 @@
-﻿using RubiksSharp.Model;
-using RubiksSharp.Model.Data;
+﻿using RubiksSharp.Model.Data;
 
-namespace RubiksSharp
+namespace RubiksSharp.Model
 {
     public class Facelet : IDeepCloneable<Facelet>
     {

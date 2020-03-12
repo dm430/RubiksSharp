@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RubiksSharp.Model;
+using System.Collections.Generic;
 
 namespace RubiksSharp.Viewer.ViewModels
 {
